@@ -1,8 +1,11 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Font;
@@ -42,9 +45,20 @@ public class Main_Game extends JFrame {
 	ImageIcon bo = new ImageIcon("./images/bo.jpg");
 	// ImageIcon nullImage = new ImageIcon("");
 
-	JButton bt1 = new JButton(gawi);
-	JButton bt2 = new JButton(bawi);
-	JButton bt3 = new JButton(bo);
+	Image img1 = gawi.getImage();
+	Image img2 = bawi.getImage();
+	Image img3 = bo.getImage();
+	Image changeImg1 = img1.getScaledInstance(135,170, Image.SCALE_SMOOTH);
+	Image changeImg2 = img2.getScaledInstance(135,170, Image.SCALE_SMOOTH);
+	Image changeImg3 = img3.getScaledInstance(135,170, Image.SCALE_SMOOTH);
+	ImageIcon changeIcon1 = new ImageIcon(changeImg1);
+	ImageIcon changeIcon2 = new ImageIcon(changeImg2);
+	ImageIcon changeIcon3 = new ImageIcon(changeImg3);
+	
+	
+	JButton bt1 = new JButton(changeIcon1);
+	JButton bt2 = new JButton(changeIcon2);
+	JButton bt3 = new JButton(changeIcon3);
 
 	JLabel la1 = new JLabel("나");
 	JLabel la2 = new JLabel("컴퓨터");
@@ -62,17 +76,24 @@ public class Main_Game extends JFrame {
 	int count = 0;
 	int second = 0;
 
-	Font font = new Font("", Font.BOLD, 150);
+	Font font1 = new Font("", Font.BOLD, 150);
+	Font font2 = new Font("", Font.BOLD, 30);
 
 	public Main_Game() {
 		setTitle("가위 바위 보 게임");
 		Container c = getContentPane();
-		c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
+		c.setLayout(new GridLayout(4,1,0,0));
 
-		time.setFont(font);
+		time.setFont(font1);
+		
+		la1.setFont(font2);
+		la2.setFont(font2);
+		la3.setFont(font2);
 
 		c.add(new Nouth_Pane());
-		c.add(new Center_Pane());
+		c.add(new Center_Pane1());
+		c.add(new Center_Pane2());
+		//c.add(new Center_Pane());
 		c.add(new South_Pane());
 
 		setSize(1300, 800);
@@ -81,7 +102,12 @@ public class Main_Game extends JFrame {
 
 	class Nouth_Pane extends JPanel {
 		public Nouth_Pane() {
+			this.setLayout(new FlowLayout());
 			this.setBackground(Color.GRAY);
+			
+			bt1.setPreferredSize(new Dimension(180, 180));
+			bt2.setPreferredSize(new Dimension(180, 180));
+			bt3.setPreferredSize(new Dimension(180, 180));
 
 			bt1.setEnabled(false);
 			bt2.setEnabled(false);
@@ -190,6 +216,7 @@ public class Main_Game extends JFrame {
 		JLabel la = new JLabel("게임을 시작하려면 '시작' 버튼을 누르세요");
 
 		public South_Pane() {
+			this.setMaximumSize(new Dimension(1300,200));
 			this.setLayout(new FlowLayout());
 			this.setBackground(Color.PINK);
 			this.add(la);
