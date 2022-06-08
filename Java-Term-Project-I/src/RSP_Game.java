@@ -32,8 +32,9 @@ public class RSP_Game extends JFrame {
 	public RSP_Game() {
 		setTitle("별상자의 게임");
 		createMenu();
-
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(650, 300);
+		
 		setVisible(true);
 	}
 
