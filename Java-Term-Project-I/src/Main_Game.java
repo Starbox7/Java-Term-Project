@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Font;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -66,13 +67,13 @@ public class Main_Game extends JFrame {
 	public Main_Game() {
 		setTitle("가위 바위 보 게임");
 		Container c = getContentPane();
-		c.setLayout(new BorderLayout());
+		c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 
 		time.setFont(font);
 
-		c.add(new Nouth_Pane(), BorderLayout.NORTH);
-		c.add(new Center_Pane(), BorderLayout.CENTER);
-		c.add(new South_Pane(), BorderLayout.SOUTH);
+		c.add(new Nouth_Pane());
+		c.add(new Center_Pane());
+		c.add(new South_Pane());
 
 		setSize(1300, 800);
 		setVisible(true);
