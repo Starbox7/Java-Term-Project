@@ -1,60 +1,38 @@
 package p;
 
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.*;
-
-public class p extends JFrame {
-	private JLabel imgLabel = new JLabel();
-
-	public p() {
-		setTitle("Menu에 Action 리스너 만들기 예제");
-		createMenu();
-		getContentPane().add(imgLabel, BorderLayout.CENTER);
-		setSize(250, 220);
-		setVisible(true);
-	}
-
-	private void createMenu() {
-		JMenuBar mb = new JMenuBar();
-		JMenuItem[] menuItem = new JMenuItem[4];
-		String[] itemTitle = { "Load", "Hide", "ReShow", "Exit" };
-		JMenu screenMenu = new JMenu("Screen");
-
-		// 4개의 메뉴아이템을 Screen 메뉴에 삽입한다.
-		MenuActionListener listener = new MenuActionListener();
-		for (int i = 0; i < menuItem.length; i++) {
-			menuItem[i] = new JMenuItem(itemTitle[i]);
-			menuItem[i].addActionListener(listener);
-			screenMenu.add(menuItem[i]);
-		}
-		mb.add(screenMenu);
-		setJMenuBar(mb);
-	}
-
-	class MenuActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			String cmd = e.getActionCommand();
-			switch (cmd) { // 메뉴 아이템의 종류 구분
-			case "Load":
-				if (imgLabel.getIcon() != null)
-					return; // 이미 로딩되었으면 리턴
-				imgLabel.setIcon(new ImageIcon("images/img.jpg"));
-				break;
-			case "Hide":
-				imgLabel.setVisible(false);
-				break;
-			case "ReShow":
-				imgLabel.setVisible(true);
-				break;
-			case "Exit":
-				System.exit(0);
-				break;
-			}
-		}
-	}
+public class p {
 
 	public static void main(String[] args) {
-		new p();
+		int randomNums[] = new int[10];
+		
+		for (int i = 0; i < 10; i++) {
+			randomNums[i] = (int) (Math.random() * 50);
+		}
+		
+		System.out.print("[");
+		for (int i = 0; i < 10; i++) {
+			System.out.print(randomNums[i]+"/");
+		}
+		System.out.print("]");
+		
+		//while (true) {
+			int count = 0;
+			for (int i = 10; i < 10; i++) {
+				for (int j = 0; j < 10; j++) {
+					if (randomNums[i] == randomNums[j]) {
+						randomNums[i] = (int) (Math.random() * 50);
+					} else {
+						count ++;
+					}
+				}
+			}
+			if (count == 100) {
+				for (int i = 0; i < 10; i++) {
+					System.out.print(randomNums[i] + "/");
+				}
+				//break;
+			}
+			System.out.print("retry");
+		//}
 	}
 }
