@@ -5,7 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
+import java.awt.Font;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,9 +25,10 @@ public class Main_Game extends JFrame {
 	public void tempTask() {
 		TimerTask task = new TimerTask() {
 			public void run() {
-				second++;
-				time.setText(""+second);
-				
+				if (result == 0) {
+					second++;
+					time.setText("" + second);
+				}
 			}
 		};
 		tmr.schedule(task, 0, 1000);
@@ -56,13 +58,17 @@ public class Main_Game extends JFrame {
 	JLabel time = new JLabel("0");
 
 	int result = 0;
-
+	int count = 0;
 	int second = 0;
+
+	Font font = new Font("", Font.BOLD, 150);
 
 	public Main_Game() {
 		setTitle("가위 바위 보 게임");
 		Container c = getContentPane();
 		c.setLayout(new BorderLayout());
+
+		time.setFont(font);
 
 		c.add(new Nouth_Pane(), BorderLayout.NORTH);
 		c.add(new Center_Pane(), BorderLayout.CENTER);
@@ -111,7 +117,7 @@ public class Main_Game extends JFrame {
 					bt3.setEnabled(false);
 					bt.setEnabled(true);
 					result = 1;
-					tmr.cancel();
+
 				}
 			}
 		}
@@ -130,7 +136,6 @@ public class Main_Game extends JFrame {
 					bt3.setEnabled(false);
 					bt.setEnabled(true);
 					result = 1;
-					tmr.cancel();
 
 				} else if (r == 1) {
 					la3.setIcon(bawi);
@@ -162,7 +167,7 @@ public class Main_Game extends JFrame {
 					bt3.setEnabled(false);
 					bt.setEnabled(true);
 					result = 1;
-					tmr.cancel();
+
 				} else if (r == 2) {
 					la3.setIcon(bo);
 					la3.setForeground(Color.BLACK);
@@ -207,7 +212,12 @@ public class Main_Game extends JFrame {
 				la3.setText("");
 				time.setText("0");
 
-				tempTask();
+				second = 0;
+				result = 0;
+				if (count == 0) {
+					tempTask();
+					count++;
+				}
 			}
 		}
 	}
